@@ -1,0 +1,42 @@
+{
+  "_comment": "Branding configuration for Agent CLI - All fields are optional",
+  
+  "name": "Agent CLI",
+  
+  "ascii_art": {
+    "_comment": "ASCII art logos - use array format for better control",
+    "default_array": [
+      " █████╗  ██████╗ ███████╗███╗   ██╗████████╗    ██████╗██╗     ██╗",
+      "██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝   ██╔════╝██║     ██║",
+      "███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║      ██║     ██║     ██║",
+      "██╔══██║██║   ██║██╔══╝  ██║╚██╗██║   ██║      ██║     ██║     ██║",
+      "██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║      ╚██████╗███████╗██║",
+      "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝       ╚═════╝╚══════╝╚═╝"
+    ],
+    "short": "AGENT CLI",
+    "minimal": "AGENT CLI"
+  },
+  
+  "colors": {
+    "_comment": "Color theme for gradient effects and tips",
+    "gradient": ["#808080", "#909090", "#A0A0A0", "#C0C0C0", "#E0E0E0"],
+    "tips": "#FFFFFF",
+    "logo_fallback": "#A0A0A0"
+  },
+  
+  "startup_tips_title": "ヒント:",
+  "startup_tips": [
+    "1. 様々なタスクを実行できます",
+    "2. 具体的な指示で最良の結果を",
+    "3. /help でコマンド一覧を表示",
+    "4. project_tools/ にカスタムツール",
+    "5. PROJECT.md でプロンプト設定",
+    "6. /model でAIモデル切替",
+    "7. ESC で入力クリア・終了"
+  ],
+  
+  "keyboard_hints": "ESC: クリア/終了  |  Ctrl+C: コピー後Enterで貼付  |  ''': 複数行",
+  "home_dir_warning": "プロジェクトディレクトリでの実行を推奨します",
+  
+  "version": "0.1.0-template"
+}

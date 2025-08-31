@@ -1,0 +1,49 @@
+# DbRheo Project Dependencies
+# This file contains the high-level dependencies
+# Use pip-compile to generate requirements.txt with exact versions
+
+# Web Framework and Server
+fastapi>=0.116.0
+uvicorn[standard]>=0.35.0
+
+# Database Related
+sqlalchemy[asyncio]>=2.0.42
+asyncpg>=0.30.0
+aiomysql>=0.2.0
+aiosqlite>=0.21.0
+
+# AI and API
+google-genai>=1.0.0  # 新版Gemini SDK，支持显式缓存
+anthropic>=0.34.0  # Claude API support
+openai>=1.0.0  # OpenAI GPT API support
+
+# Core Dependencies
+pydantic>=2.11.7
+pyyaml>=6.0.2
+rich>=14.1.0
+rich-gradient>=0.1.2
+pygments>=2.17.2  # 代码高亮支持，Rich的Syntax组件需要
+click>=8.2.1
+python-dotenv>=1.0.0
+
+# Cross-platform readline support
+pyreadline3>=3.5.4; sys_platform == "win32"
+gnureadline>=8.2.10; sys_platform != "win32"
+
+# Utility Libraries
+aiofiles>=24.1.0
+httpx>=0.28.1
+
+# Network and Parsing
+aiohttp>=3.12.0
+beautifulsoup4>=4.13.4
+requests>=2.32.4
+
+# Monitoring and Telemetry (Optional)
+opentelemetry-api>=1.36.0
+opentelemetry-sdk>=1.36.0
+opentelemetry-exporter-otlp>=1.36.0
+opentelemetry-instrumentation-httpx>=0.57b0
+
+# MCP (Model Context Protocol) Support
+mcp>=1.0.0

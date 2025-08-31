@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:arxiv.org)",
+      "Bash(python test_qdrant_connection.py:*)",
+      "Bash(python3:*)",
+      "Bash(curl:*)",
+      "Read(/mnt/c/Users/q9951/Desktop/**)",
+      "Bash(grep:*)",
+      "Read(/mnt/c/Users/q9951/Desktop/Qwen3-Reranker-8B/**)",
+      "WebFetch(domain:ai.google.dev)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
