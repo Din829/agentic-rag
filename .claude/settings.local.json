@@ -9,7 +9,12 @@
       "Read(/mnt/c/Users/q9951/Desktop/**)",
       "Bash(grep:*)",
       "Read(/mnt/c/Users/q9951/Desktop/Qwen3-Reranker-8B/**)",
-      "WebFetch(domain:ai.google.dev)"
+      "WebFetch(domain:ai.google.dev)",
+      "Read(C:\\Users\\q9951\\.local\\share/**)",
+      "Bash(powershell:*)",
+      "Bash(git fetch:*)",
+      "Bash(tree:*)",
+      "WebFetch(domain:qdrant.tech)"
     ],
     "deny": [],
     "ask": []
