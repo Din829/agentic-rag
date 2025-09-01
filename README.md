@@ -1,6 +1,5 @@
 # Agentic RAG
-
-![Agentic RAG Architecture](586a0b32ab4ea6d689359c6c55d5990.png)
+<img width="597" height="228" alt="586a0b32ab4ea6d689359c6c55d5990" src="https://github.com/user-attachments/assets/f220ed50-eeec-44f3-9677-1d8cd54edd77" />
 
 An intelligent agent framework with integrated RAG capabilities, built on Gemini CLI architecture. The system combines a general-purpose agent engine with specialized RAG tools for document indexing, semantic search, and result reranking.
 
