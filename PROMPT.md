@@ -1,47 +1,47 @@
-# 项目提示词配置
+# Project Prompt Configuration
 
-## RAG 工具使用指南
+## RAG Tools Usage Guide
 
-你现在拥有三个 RAG 工具，请根据用户需求灵活使用：
+You now have three RAG tools, please use them flexibly according to user needs:
 
-### 1. doc_index - 文档索引工具
-用于将各种内容索引到向量数据库
-- 自动识别文件类型：文本、代码、PDF、图像等
-- 智能处理选项：图像可用 OCR 提取文字，代码可提取结构
-- 可选择分块策略：paragraph（段落）、fixed（固定大小）、sentence（句子）、auto（自动）
-- 使用 Gemini embedding 生成向量
-- 存储到 Qdrant 向量数据库
+### 1. doc_index - Document Indexing Tool
+Used to index various content into vector database
+- Automatic file type recognition: text, code, PDF, images, etc.
+- Intelligent processing options: images can use OCR for text extraction, code can extract structure
+- Selectable chunking strategies: paragraph, fixed (fixed size), sentence, auto (automatic)
+- Uses Gemini embedding to generate vectors
+- Stores to Qdrant vector database
 
-### 2. vector_search - 向量搜索工具  
-用于语义搜索相关内容
-- 输入查询文本，返回语义相似的文档块
-- 支持指定集合、返回数量、相似度阈值
-- 支持元数据过滤和自定义距离度量
+### 2. vector_search - Vector Search Tool
+Used for semantic search of relevant content
+- Input query text, returns semantically similar document chunks
+- Supports specifying collection, return count, similarity threshold
+- Supports metadata filtering and custom distance metrics
 
-### 3. rerank - 重排序工具
-用于优化搜索结果相关性
-- 使用 Qwen3-Reranker-8B 模型精确计算相关性
-- 对搜索结果重新排序，提升准确性
-- 支持设置阈值过滤低相关内容
+### 3. rerank - Reranking Tool
+Used to optimize search result relevance
+- Uses Qwen3-Reranker-8B model for precise relevance calculation
+- Reorders search results to improve accuracy
+- Supports threshold setting to filter low-relevance content
 
-### 4. collection_info - 集合信息工具
-用于检查向量数据库状态
-- 查看特定集合是否存在和文档数量
-- 列出所有集合及其统计信息
-- **检查具体文件是否已索引**（check_files 参数）
-- **列出集合中所有已索引的文件**（list_sources 参数）
-- 避免重复索引已存在的文档
+### 4. collection_info - Collection Information Tool
+Used to check vector database status
+- View whether specific collection exists and document count
+- List all collections and their statistics
+- **Check if specific files are already indexed** (check_files parameter)
+- **List all indexed files in collection** (list_sources parameter)
+- Avoid duplicate indexing of existing documents
 
-## 使用流程建议
+## Recommended Usage Workflow
 
-1. **检查阶段**：先用 collection_info 检查集合是否存在和文档数量
-2. **索引阶段**：如果集合不存在或为空，用 doc_index 索引文档
-   - 系统会自动识别文件类型并选择合适的处理方式
-   - PDF 会提取文本，图像可选 OCR，代码保留结构
-3. **搜索阶段**：用 vector_search 进行初步语义搜索（召回）
-4. **重排序阶段**：强烈建议总是使用 rerank 重排序，这是 RAG 的关键步骤
-   - 向量搜索提供初步召回
-   - rerank 提供精确相关性排序
-   - 两者结合才能获得最佳结果
+1. **Check Phase**: First use collection_info to check if collection exists and document count
+2. **Index Phase**: If collection doesn't exist or is empty, use doc_index to index documents
+   - System automatically recognizes file types and selects appropriate processing methods
+   - PDFs extract text, images optionally use OCR, code preserves structure
+3. **Search Phase**: Use vector_search for initial semantic search (recall)
+4. **Rerank Phase**: Strongly recommend always using rerank for reordering, this is a key step in RAG
+   - Vector search provides initial recall
+   - rerank provides precise relevance ranking
+   - Combining both achieves optimal results
 
 

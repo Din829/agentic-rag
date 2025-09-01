@@ -1,63 +1,103 @@
-# RAG 智能体使用指南
+# Agentic RAG
 
-## 系统架构
+![Agentic RAG Architecture](586a0b32ab4ea6d689359c6c55d5990.png)
 
-本 RAG 智能体基于Gemini CLI框架，集成了向量数据库、语义嵌入和重排序模型，提供完整的检索增强生成能力。系统使用 Gemini embedding API 进行文本向量化，Qdrant 作为向量存储，Qwen3-Reranker-8B 进行结果精排。
+An intelligent agent framework with integrated RAG capabilities, built on Gemini CLI architecture. The system combines a general-purpose agent engine with specialized RAG tools for document indexing, semantic search, and result reranking.
 
-## 核心能力
+## Architecture
 
-### 文档管理能力
+**Core Design**: Universal Agent Framework + Professional RAG Toolchain
 
-智能体能够处理多种格式的文档输入，包括 Markdown、纯文本、PDF 等格式。支持单文件索引、批量索引和目录递归索引。在索引过程中，系统会自动进行文档分块，可选择段落分割、固定长度分割或句子分割策略。每个文档块都会生成对应的向量表示并存储元数据，包括来源文件、创建时间、块位置等信息。
+- **Agent Engine**: Based on proven Gemini CLI architecture with turn-based conversation management, tool scheduling, and streaming responses
+- **RAG Pipeline**: Document processing → Vector embedding → Semantic search → Cross-encoder reranking
+- **Multi-Model Support**: Gemini, Claude, OpenAI for LLM; Gemini embedding-001 for vectorization; Qwen3-Reranker-8B for reranking
 
-### 语义搜索能力
+## Key Features
 
-系统提供基于语义相似度的搜索功能，而非简单的关键词匹配。用户输入自然语言查询后，系统会将查询转换为向量表示，在向量空间中寻找最相似的文档块。搜索支持设置返回数量、相似度阈值和元数据过滤条件。搜索结果包含原始文本、相似度分数和来源信息。
+**Intelligent Agent Capabilities**
+- Autonomous decision-making and workflow orchestration
+- Context-aware tool selection and parameter optimization
+- Dual history mechanism with intelligent compression
+- Real-time streaming responses with tool execution feedback
 
-### 重排序优化
+**Advanced RAG Implementation**
+- Multi-format document processing (PDF, Office, Markdown, code, images with OCR)
+- Configurable chunking strategies (paragraph, fixed-size, sentence, auto)
+- Semantic search with metadata filtering and threshold controls
+- Cross-encoder reranking for precision improvement
 
-在初步检索后，系统使用 Qwen3-Reranker-8B 模型对结果进行精确重排序。重排序模型采用交叉编码器架构，能够更准确地计算查询与文档的相关性。支持设置相关性阈值过滤低质量结果，确保返回内容的准确性和相关性。
+**Production-Ready Infrastructure**
+- Asynchronous architecture with concurrent tool execution
+- Comprehensive monitoring with OpenTelemetry integration
+- Multi-environment configuration management
+- Graceful error handling and fallback mechanisms
 
-### 集合管理能力
+## Technical Stack
 
-系统支持多个独立的文档集合，每个集合可以存储不同主题或来源的文档。提供集合创建、查询、统计等管理功能。能够检查特定文件是否已被索引，避免重复处理。支持列出集合中所有已索引的文件清单。
+| Component | Technology | Configuration |
+|-----------|------------|---------------|
+| **LLM** | Gemini-2.5-flash | Primary model with Claude/OpenAI fallback |
+| **Embedding** | Gemini embedding-001 | 768-dim vectors, batch size 250 |
+| **Vector DB** | Qdrant | Local deployment, cosine similarity |
+| **Reranker** | Qwen3-Reranker-8B | GPTQ 4-bit quantization, 12GB VRAM |
+| **Framework** | FastAPI + React | Async backend, TypeScript frontend |
 
-## 工作流程
+## Project Structure
 
-### 初始化阶段
+```
+├── packages/
+│   ├── core/          # Agent engine and API services
+│   ├── cli/           # Command-line interface
+│   └── web/           # React web interface (MVP)
+├── project_tools/     # RAG-specific tools
+│   ├── doc_index_tool.py      # Document indexing
+│   ├── vector_search_tool.py  # Semantic search
+│   ├── rerank_tool.py         # Result reranking
+│   └── collection_info_tool.py # Database management
+└── test_documents/    # Sample AI/ML knowledge base
+```
 
-当接收到新的文档处理任务时，智能体首先使用 collection_info 工具检查目标集合的状态。如果集合不存在，系统会在首次索引时自动创建。通过 list_sources 参数可以查看集合中已有的文件列表，或使用 check_files 参数验证特定文件的索引状态。
+## Quick Start
 
-### 文档索引阶段
+**Prerequisites**
+- Python 3.9+
+- Qdrant vector database (local or cloud)
+- GOOGLE_API_KEY or GEMINI_API_KEY for embeddings and LLM
+- Optional: ANTHROPIC_API_KEY for Claude models
+- Optional: OPENAI_API_KEY for OpenAI models
+- Optional: Qwen3-Reranker-8B model for reranking
 
-确认需要索引后，智能体使用 doc_index 工具处理文档。系统会根据文档特征自动选择合适的分块策略，或接受用户指定的分块参数。每个文档块通过 Gemini embedding API 生成 768 维向量表示。向量和元数据被存储到 Qdrant 数据库的指定集合中。索引完成后返回处理的块数量和状态信息。
+**Basic Setup**
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-### 检索阶段
+# Configure environment
+cp .env.example .env
+# Edit .env with your API keys and database settings
 
-用户提出查询时，智能体使用 vector_search 工具进行语义搜索。查询文本首先被转换为向量表示，使用 RETRIEVAL_QUERY 任务类型优化。系统在向量数据库中执行近似最近邻搜索，返回相似度最高的文档块。初步结果包含文档内容、相似度分数和元数据信息。
+# Start Qdrant (if local)
+docker run -p 6333:6333 qdrant/qdrant
 
-### 重排序阶段
+# Run CLI interface
+cd packages/cli && python cli.py
+```
 
-为提高结果准确性，智能体使用 rerank 工具对检索结果进行重排序。Qwen3-Reranker-8B 模型会重新计算查询与每个候选文档的相关性分数。基于新的分数重新排序结果，过滤低于阈值的文档。最终返回经过优化的文档列表，确保相关性和质量。
+## Deployment Considerations
 
-## 技术规格
+**Complexity Notice**: This project requires significant infrastructure setup including local vector database deployment and large language model hosting. It is designed as an **architectural reference** rather than a plug-and-play solution.
 
-### 嵌入模型配置
+**Resource Requirements**:
+- Qdrant vector database (2GB+ RAM recommended)
+- Qwen3-Reranker-8B model (12GB VRAM for GPU inference)
+- Stable internet connection for Gemini API calls
 
-使用 Google Gemini embedding-001 模型，支持 768、1536、3072 三种维度输出。默认使用 768 维以平衡性能和存储成本。支持批量嵌入，单批次最大 250 个文本。包含自动重试和错误处理机制。
+**Recommended Use Cases**:
+- Learning advanced RAG implementation patterns
+- Understanding agent-driven architecture design
+- Adapting components for custom RAG solutions
+- Research and development reference
 
-### 向量数据库配置
+## License
 
-Qdrant 运行在本地 6333 端口，支持持久化存储和事务操作。使用余弦相似度作为默认距离度量。支持并发查询和批量更新。提供完整的 CRUD 操作接口。
-
-### 重排序模型配置
-
-Qwen3-Reranker-8B 使用 GPTQ 4-bit 量化，适配 12GB 显存 GPU。模型加载时禁用编译优化以避免 Triton 依赖。批处理大小设为 4 以优化显存使用。支持 CPU 和 GPU 推理模式。
-
-## 使用建议
-
-在处理新的文档集合前，始终先检查集合状态和已索引文件，避免不必要的重复处理。对于大型文档，建议使用段落分割策略，保持语义完整性。设置合理的相似度阈值，通常 0.3 到 0.5 之间效果较好。
-
-语义搜索适合概念性查询，如果需要精确匹配，应结合传统关键词搜索。初次检索建议返回较多结果（如 top 10），然后通过重排序筛选。重排序虽然提高准确性，但会增加延迟，需要权衡使用场景。
-
-对于多语言文档，系统支持但可能需要调整嵌入维度以获得更好效果。定期检查向量数据库的存储使用情况，必要时清理过期或低质量的索引。在生产环境中，建议为不同类型的文档创建独立的集合，便于管理和优化。
+MIT License - See LICENSE file for details.

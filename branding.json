@@ -1,20 +1,20 @@
 {
-  "_comment": "Branding configuration for Agent CLI - All fields are optional",
-  
-  "name": "Agent CLI",
-  
+  "_comment": "Branding configuration for Agentic RAG - All fields are optional",
+
+  "name": "Agentic RAG",
+
   "ascii_art": {
     "_comment": "ASCII art logos - use array format for better control",
     "default_array": [
-      " █████╗  ██████╗ ███████╗███╗   ██╗████████╗    ██████╗██╗     ██╗",
-      "██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝   ██╔════╝██║     ██║",
-      "███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║      ██║     ██║     ██║",
-      "██╔══██║██║   ██║██╔══╝  ██║╚██╗██║   ██║      ██║     ██║     ██║",
-      "██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║      ╚██████╗███████╗██║",
-      "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝       ╚═════╝╚══════╝╚═╝"
+      " █████╗  ██████╗ ███████╗███╗   ██╗████████╗██╗ ██████╗    ██████╗  █████╗  ██████╗ ",
+      "██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝██║██╔════╝    ██╔══██╗██╔══██╗██╔════╝ ",
+      "███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║   ██║██║         ██████╔╝███████║██║  ███╗",
+      "██╔══██║██║   ██║██╔══╝  ██║╚██╗██║   ██║   ██║██║         ██╔══██╗██╔══██║██║   ██║",
+      "██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║   ██║╚██████╗    ██║  ██║██║  ██║╚██████╔╝",
+      "╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝ ╚═════╝    ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ "
     ],
-    "short": "AGENT CLI",
-    "minimal": "AGENT CLI"
+    "short": "AGENTIC RAG",
+    "minimal": "RAG"
   },
   
   "colors": {
@@ -24,19 +24,19 @@
     "logo_fallback": "#A0A0A0"
   },
   
-  "startup_tips_title": "ヒント:",
+  "startup_tips_title": "RAG Tips:",
   "startup_tips": [
-    "1. 様々なタスクを実行できます",
-    "2. 具体的な指示で最良の結果を",
-    "3. /help でコマンド一覧を表示",
-    "4. project_tools/ にカスタムツール",
-    "5. PROJECT.md でプロンプト設定",
-    "6. /model でAIモデル切替",
-    "7. ESC で入力クリア・終了"
+    "1. Use doc_index to index documents into vector database",
+    "2. Use vector_search for semantic similarity search",
+    "3. Use rerank to improve search result relevance",
+    "4. Use collection_info to check database status",
+    "5. /help for command list and tool usage",
+    "6. /model to switch AI models (Gemini/Claude/OpenAI)",
+    "7. ESC to clear input or exit"
   ],
-  
-  "keyboard_hints": "ESC: クリア/終了  |  Ctrl+C: コピー後Enterで貼付  |  ''': 複数行",
-  "home_dir_warning": "プロジェクトディレクトリでの実行を推奨します",
-  
-  "version": "0.1.0-template"
+
+  "keyboard_hints": "ESC: Clear/Exit  |  Ctrl+C: Copy then Enter to paste  |  ''': Multi-line input",
+  "home_dir_warning": "Recommended to run from project directory",
+
+  "version": "1.0.0-agentic-rag"
 }
